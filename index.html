@@ -1,0 +1,408 @@
+<!DOCTYPE html>
+<html lang="es" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ED Steel Fabricator - Metal Structures</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        metal: {
+                            900: '#111827',
+                            800: '#1f2937',
+                            700: '#374151',
+                            600: '#4b5563',
+                        },
+                        industrial: {
+                            yellow: '#facc15', // Accent color (safety yellow)
+                        }
+                    },
+                    backgroundImage: {
+                        'metal-texture': "radial-gradient(#4b5563 1px, transparent 1px)",
+                    }
+                }
+            }
+        }
+    </script>
+    <style>
+        /* Textura sutil para dar aspecto metálico al fondo */
+        .bg-pattern {
+            background-image: radial-gradient(rgba(255, 255, 255, 0.05) 1px, transparent 1px);
+            background-size: 20px 20px;
+        }
+        /* Efecto de elevación industrial en tarjetas */
+        .industrial-card {
+            transition: all 0.3s ease;
+            border-bottom: 4px solid transparent;
+        }
+        .industrial-card:hover {
+            transform: translateY(-5px);
+            border-bottom: 4px solid #facc15;
+            box-shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.5);
+        }
+    </style>
+</head>
+<body class="bg-metal-900 text-gray-300 font-sans antialiased overflow-x-hidden">
+
+    <!-- Navegación -->
+    <nav class="bg-metal-900 border-b border-metal-700 fixed w-full z-50 top-0 shadow-lg">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex justify-between h-20">
+                <div class="flex items-center">
+                    <div class="flex-shrink-0 flex items-center gap-3">
+                        <!-- Icono de yunque/metalurgia en SVG -->
+                        <svg class="h-10 w-10 text-industrial-yellow" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 21V5a2 2 0 00-2-2H7a2 2 0 00-2 2v16m14 0h2m-2 0h-5m-9 0H3m2 0h5M9 7h1m-1 4h1m4-4h1m-1 4h1m-5 10v-5a1 1 0 011-1h2a1 1 0 011 1v5m-4 0h4" />
+                        </svg>
+                        <span class="text-white text-xl md:text-2xl font-black tracking-wider uppercase">ED <span class="text-industrial-yellow">Steel</span></span>
+                    </div>
+                </div>
+                <!-- Menú Desktop -->
+                <div class="hidden md:flex items-center space-x-8">
+                    <a href="#home" class="text-gray-300 hover:text-white transition-colors uppercase text-sm font-bold tracking-wide">Home</a>
+                    <a href="#about" class="text-gray-300 hover:text-white transition-colors uppercase text-sm font-bold tracking-wide">About</a>
+                    <a href="#services" class="text-gray-300 hover:text-white transition-colors uppercase text-sm font-bold tracking-wide">Services</a>
+                    <a href="#contact" class="text-gray-300 hover:text-white transition-colors uppercase text-sm font-bold tracking-wide">Contact</a>
+                    <a href="tel:305-926-4904" class="bg-industrial-yellow text-metal-900 px-5 py-2 font-bold uppercase text-sm rounded shadow hover:bg-yellow-400 transition-colors flex items-center gap-2">
+                        <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 5a2 2 0 012-2h3.28a1 1 0 01.948.684l1.498 4.493a1 1 0 01-.502 1.21l-2.257 1.13a11.042 11.042 0 005.516 5.516l1.13-2.257a1 1 0 011.21-.502l4.493 1.498a1 1 0 01.684.949V19a2 2 0 01-2 2h-1C9.716 21 3 14.284 3 6V5z"></path></svg>
+                        Call Us
+                    </a>
+                </div>
+                <!-- Botón Menú Móvil -->
+                <div class="flex md:hidden items-center">
+                    <button id="mobile-menu-btn" class="text-gray-300 hover:text-white focus:outline-none">
+                        <svg class="h-8 w-8" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16" />
+                        </svg>
+                    </button>
+                </div>
+            </div>
+        </div>
+        <!-- Menú Móvil Desplegable -->
+        <div id="mobile-menu" class="hidden md:hidden bg-metal-800 border-t border-metal-700">
+            <div class="px-2 pt-2 pb-3 space-y-1 sm:px-3">
+                <a href="#home" class="block px-3 py-2 text-base font-medium text-white hover:bg-metal-700 uppercase">Home</a>
+                <a href="#about" class="block px-3 py-2 text-base font-medium text-white hover:bg-metal-700 uppercase">About</a>
+                <a href="#services" class="block px-3 py-2 text-base font-medium text-white hover:bg-metal-700 uppercase">Services</a>
+                <a href="#contact" class="block px-3 py-2 text-base font-medium text-white hover:bg-metal-700 uppercase">Contact</a>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <section id="home" class="relative pt-20 pb-32 flex items-center min-h-[85vh] bg-pattern">
+        <div class="absolute inset-0 bg-gradient-to-r from-metal-900 via-metal-900/90 to-transparent z-0"></div>
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10 w-full">
+            <div class="max-w-2xl">
+                <div class="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-metal-800 border border-metal-700 mb-6">
+                    <span class="w-2 h-2 rounded-full bg-industrial-yellow animate-pulse"></span>
+                    <span class="text-xs uppercase tracking-widest text-gray-400 font-bold">Welding & Fabrication</span>
+                </div>
+                <h1 class="text-5xl md:text-6xl font-black text-white leading-tight mb-6 uppercase tracking-tight">
+                    Forging <span class="text-transparent bg-clip-text bg-gradient-to-r from-industrial-yellow to-yellow-600">Quality</span> and Strength
+                </h1>
+                <p class="text-lg md:text-xl text-gray-400 mb-10 leading-relaxed border-l-4 border-industrial-yellow pl-4">
+                    Specialists in steel structures, high-impact aluminum doors, hand-forged gates, and metal renovations. We protect and beautify your property.
+                </p>
+                <div class="flex flex-col sm:flex-row gap-4">
+                    <a href="#contact" class="text-center bg-industrial-yellow text-metal-900 font-bold uppercase tracking-wider py-4 px-8 shadow-lg hover:bg-yellow-400 transition-all transform hover:-translate-y-1">
+                        Request a Quote
+                    </a>
+                    <a href="#services" class="text-center bg-metal-800 border border-metal-600 text-white font-bold uppercase tracking-wider py-4 px-8 hover:bg-metal-700 transition-all">
+                        View Services
+                    </a>
+                </div>
+            </div>
+        </div>
+        <!-- Decoración industrial -->
+        <div class="absolute bottom-0 right-0 p-8 opacity-10 hidden lg:block">
+            <svg width="400" height="400" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="0.5"><path d="M12 2L2 7l10 5 10-5-10-5zM2 17l10 5 10-5M2 12l10 5 10-5"/></svg>
+        </div>
+    </section>
+
+    <!-- Nosotros Section -->
+    <section id="about" class="py-24 bg-metal-800 relative">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="grid grid-cols-1 lg:grid-cols-2 gap-16 items-center">
+                <div class="space-y-8">
+                    <h2 class="text-sm font-bold text-industrial-yellow tracking-widest uppercase">About Us</h2>
+                    <h3 class="text-3xl md:text-4xl font-black text-white uppercase leading-tight">Artisan Craftsmanship & Industrial Security</h3>
+                    <p class="text-gray-400 text-lg leading-relaxed">
+                        At <strong class="text-white">ED Steel Fabricator</strong>, we design beautiful aluminum entry doors that are incredibly strong, storm-resistant, and theft-deterrent. We offer reinforced aluminum tubing with double laminated impact glass and commercial-grade hardware for enhanced security.
+                    </p>
+                    <p class="text-gray-400 text-lg leading-relaxed">
+                        Our authentic hand-forged aluminum driveway and pedestrian gates are second to none. We take fencing to a whole new level by working with you to create a design that fits your budget, provides an exciting view, and keeps your family or business safe.
+                    </p>
+                    <ul class="space-y-4 pt-4">
+                        <li class="flex items-center gap-3 text-gray-300">
+                            <svg class="w-6 h-6 text-industrial-yellow" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path></svg>
+                            Custom artisan designs.
+                        </li>
+                        <li class="flex items-center gap-3 text-gray-300">
+                            <svg class="w-6 h-6 text-industrial-yellow" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path></svg>
+                            Commercial-grade materials.
+                        </li>
+                        <li class="flex items-center gap-3 text-gray-300">
+                            <svg class="w-6 h-6 text-industrial-yellow" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path></svg>
+                            Total commitment to customer satisfaction.
+                        </li>
+                    </ul>
+                </div>
+                <div class="relative">
+                    <div class="absolute inset-0 bg-industrial-yellow transform translate-x-4 translate-y-4 rounded-sm"></div>
+                    <!-- Placeholder de imagen industrial -->
+                    <div class="relative bg-metal-700 h-96 flex items-center justify-center rounded-sm border-2 border-metal-600 z-10 overflow-hidden">
+                        <div class="absolute inset-0 opacity-20" style="background-image: repeating-linear-gradient(45deg, transparent, transparent 10px, #000 10px, #000 20px);"></div>
+                        <div class="text-center z-10">
+                            <svg class="w-20 h-20 text-metal-400 mx-auto mb-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M19 21V5a2 2 0 00-2-2H7a2 2 0 00-2 2v16m14 0h2m-2 0h-5m-9 0H3m2 0h5M9 7h1m-1 4h1m4-4h1m-1 4h1m-5 10v-5a1 1 0 011-1h2a1 1 0 011 1v5m-4 0h4"></path></svg>
+                            <span class="text-metal-300 font-bold tracking-widest uppercase">Factory / Workshop</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Servicios Section -->
+    <section id="services" class="py-24 bg-metal-900 bg-pattern">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center max-w-3xl mx-auto mb-16">
+                <h2 class="text-sm font-bold text-industrial-yellow tracking-widest uppercase mb-2">Our Specialty</h2>
+                <h3 class="text-3xl md:text-5xl font-black text-white uppercase">Featured Services</h3>
+                <div class="h-1 w-20 bg-industrial-yellow mx-auto mt-6"></div>
+            </div>
+
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+                <!-- Servicio 1 -->
+                <div class="bg-metal-800 p-8 industrial-card border border-metal-700 relative overflow-hidden group">
+                    <div class="absolute top-0 right-0 p-4 opacity-10 group-hover:opacity-20 group-hover:scale-110 transition-all">
+                        <svg class="w-24 h-24 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 21V5a2 2 0 00-2-2H7a2 2 0 00-2 2v16m14 0h2m-2 0h-5m-9 0H3m2 0h5M9 7h1m-1 4h1m4-4h1m-1 4h1m-5 10v-5a1 1 0 011-1h2a1 1 0 011 1v5m-4 0h4"></path></svg>
+                    </div>
+                    <div class="w-14 h-14 bg-metal-700 flex items-center justify-center rounded-sm mb-6 text-industrial-yellow">
+                        <svg class="w-8 h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 5a1 1 0 011-1h14a1 1 0 011 1v2a1 1 0 01-1 1H5a1 1 0 01-1-1V5zM4 13a1 1 0 011-1h6a1 1 0 011 1v6a1 1 0 01-1 1H5a1 1 0 01-1-1v-6zM16 13a1 1 0 011-1h2a1 1 0 011 1v6a1 1 0 01-1 1h-2a1 1 0 01-1-1v-6z"></path></svg>
+                    </div>
+                    <h4 class="text-xl font-bold text-white uppercase mb-3 relative z-10">Steel Structures</h4>
+                    <p class="text-gray-400 relative z-10">We specialize in manufacturing and assembling solid, durable metal structures for any type of project.</p>
+                </div>
+
+                <!-- Servicio 2 -->
+                <div class="bg-metal-800 p-8 industrial-card border border-metal-700 relative overflow-hidden group">
+                    <div class="w-14 h-14 bg-metal-700 flex items-center justify-center rounded-sm mb-6 text-industrial-yellow">
+                        <svg class="w-8 h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 11V7a4 4 0 118 0m-4 8v2m-6 4h12a2 2 0 002-2v-6a2 2 0 00-2-2H6a2 2 0 00-2 2v6a2 2 0 002 2z"></path></svg>
+                    </div>
+                    <h4 class="text-xl font-bold text-white uppercase mb-3 relative z-10">Impact Glass Doors</h4>
+                    <p class="text-gray-400 relative z-10">Reinforced aluminum doors with double laminated glass, designed for maximum security and storm resistance.</p>
+                </div>
+
+                <!-- Servicio 3 -->
+                <div class="bg-metal-800 p-8 industrial-card border border-metal-700 relative overflow-hidden group">
+                    <div class="w-14 h-14 bg-metal-700 flex items-center justify-center rounded-sm mb-6 text-industrial-yellow">
+                        <svg class="w-8 h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 10h16M4 14h16M4 18h16"></path></svg>
+                    </div>
+                    <h4 class="text-xl font-bold text-white uppercase mb-3 relative z-10">Fences and Gates</h4>
+                    <p class="text-gray-400 relative z-10">Hand-forged vehicular and pedestrian gates. Enclosures that combine stunning aesthetics with ultimate security.</p>
+                </div>
+
+                <!-- Servicio 4 -->
+                <div class="bg-metal-800 p-8 industrial-card border border-metal-700 relative overflow-hidden group">
+                    <div class="w-14 h-14 bg-metal-700 flex items-center justify-center rounded-sm mb-6 text-industrial-yellow">
+                        <svg class="w-8 h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 7h8m0 0v8m0-8l-8 8-4-4-6 6"></path></svg>
+                    </div>
+                    <h4 class="text-xl font-bold text-white uppercase mb-3 relative z-10">Stairs and Balconies</h4>
+                    <p class="text-gray-400 relative z-10">Fabrication of metal stairs, interior railings, and balconies with precise finishes and high structural integrity.</p>
+                </div>
+
+                <!-- Servicio 5 -->
+                <div class="bg-metal-800 p-8 industrial-card border border-metal-700 relative overflow-hidden group">
+                    <div class="w-14 h-14 bg-metal-700 flex items-center justify-center rounded-sm mb-6 text-industrial-yellow">
+                        <svg class="w-8 h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 14v6m-3-3h6M6 10h2a2 2 0 002-2V6a2 2 0 00-2-2H6a2 2 0 00-2 2v2a2 2 0 002 2zm10 0h2a2 2 0 002-2V6a2 2 0 00-2-2h-2a2 2 0 00-2 2v2a2 2 0 002 2zM6 20h2a2 2 0 002-2v-2a2 2 0 00-2-2H6a2 2 0 00-2 2v2a2 2 0 002 2z"></path></svg>
+                    </div>
+                    <h4 class="text-xl font-bold text-white uppercase mb-3 relative z-10">Welding and Joints</h4>
+                    <p class="text-gray-400 relative z-10">General welding services and precision metal joints for both repairs and new construction projects.</p>
+                </div>
+
+                <!-- Servicio 6 -->
+                <div class="bg-metal-800 p-8 industrial-card border border-metal-700 relative overflow-hidden group">
+                    <div class="w-14 h-14 bg-metal-700 flex items-center justify-center rounded-sm mb-6 text-industrial-yellow">
+                        <svg class="w-8 h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10.325 4.317c.426-1.756 2.924-1.756 3.35 0a1.724 1.724 0 002.573 1.066c1.543-.94 3.31.826 2.37 2.37a1.724 1.724 0 001.065 2.572c1.756.426 1.756 2.924 0 3.35a1.724 1.724 0 00-1.066 2.573c.94 1.543-.826 3.31-2.37 2.37a1.724 1.724 0 00-2.572 1.065c-.426 1.756-2.924 1.756-3.35 0a1.724 1.724 0 00-2.573-1.066c-1.543.94-3.31-.826-2.37-2.37a1.724 1.724 0 00-1.065-2.572c-1.756-.426-1.756-2.924 0-3.35a1.724 1.724 0 001.066-2.573c-.94-1.543.826-3.31 2.37-2.37.996.608 2.296.07 2.572-1.065z"></path><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z"></path></svg>
+                    </div>
+                    <h4 class="text-xl font-bold text-white uppercase mb-3 relative z-10">Renovation and Maintenance</h4>
+                    <p class="text-gray-400 relative z-10">Preventive and corrective maintenance, along with metal renovation services to extend the lifespan of your structures.</p>
+                </div>
+            </div>
+            
+            <!-- Additional features pills -->
+            <div class="mt-12 flex flex-wrap justify-center gap-3">
+                <span class="bg-metal-700 text-gray-300 px-4 py-2 rounded-full text-sm font-semibold border border-metal-600">Trellis</span>
+                <span class="bg-metal-700 text-gray-300 px-4 py-2 rounded-full text-sm font-semibold border border-metal-600">Interior Railings</span>
+                <span class="bg-metal-700 text-gray-300 px-4 py-2 rounded-full text-sm font-semibold border border-metal-600">Commercial Grade</span>
+            </div>
+        </div>
+    </section>
+
+    <!-- Contacto Section -->
+    <section id="contact" class="py-24 bg-metal-800 border-t border-metal-700">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="grid grid-cols-1 lg:grid-cols-2 gap-16">
+                
+                <!-- Info de Contacto -->
+                <div>
+                    <h2 class="text-sm font-bold text-industrial-yellow tracking-widest uppercase mb-2">Get in Touch</h2>
+                    <h3 class="text-3xl md:text-4xl font-black text-white uppercase mb-8">Request an Estimate</h3>
+                    <p class="text-gray-400 mb-8 text-lg">
+                        We want to satisfy your needs in every way by giving our best and building a long-term relationship. We would love to have you as our next happy customer.
+                    </p>
+                    
+                    <div class="space-y-6">
+                        <div class="flex items-start gap-4">
+                            <div class="bg-metal-700 p-3 rounded-sm text-industrial-yellow">
+                                <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 5a2 2 0 012-2h3.28a1 1 0 01.948.684l1.498 4.493a1 1 0 01-.502 1.21l-2.257 1.13a11.042 11.042 0 005.516 5.516l1.13-2.257a1 1 0 011.21-.502l4.493 1.498a1 1 0 01.684.949V19a2 2 0 01-2 2h-1C9.716 21 3 14.284 3 6V5z"></path></svg>
+                            </div>
+                            <div>
+                                <h4 class="text-white font-bold uppercase tracking-wider">Phones</h4>
+                                <p class="text-gray-400 mt-1">Cell: <a href="tel:305-926-4904" class="text-industrial-yellow hover:underline">305-926-4904</a></p>
+                                <p class="text-gray-400">Office: <a href="tel:786-391-1336" class="text-industrial-yellow hover:underline">786-391-1336</a></p>
+                            </div>
+                        </div>
+
+                        <div class="flex items-start gap-4">
+                            <div class="bg-metal-700 p-3 rounded-sm text-industrial-yellow">
+                                <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z"></path><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 11a3 3 0 11-6 0 3 3 0 016 0z"></path></svg>
+                            </div>
+                            <div>
+                                <h4 class="text-white font-bold uppercase tracking-wider">Address</h4>
+                                <p class="text-gray-400 mt-1">4807 E 10TH LN<br>ED Steel Fabricator</p>
+                            </div>
+                        </div>
+
+                        <div class="flex items-start gap-4">
+                            <div class="bg-metal-700 p-3 rounded-sm text-industrial-yellow">
+                                <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 10h18M7 15h1m4 0h1m-7 4h12a3 3 0 003-3V8a3 3 0 00-3-3H6a3 3 0 00-3 3v8a3 3 0 003 3z"></path></svg>
+                            </div>
+                            <div>
+                                <h4 class="text-white font-bold uppercase tracking-wider">Payments</h4>
+                                <p class="text-gray-400 mt-1">We accept all major credit and debit cards.</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Formulario -->
+                <div class="bg-metal-900 p-8 border border-metal-700 shadow-2xl relative">
+                    <!-- Textura tornillos de esquina -->
+                    <div class="absolute top-2 left-2 w-3 h-3 bg-metal-700 rounded-full border border-metal-600"></div>
+                    <div class="absolute top-2 right-2 w-3 h-3 bg-metal-700 rounded-full border border-metal-600"></div>
+                    <div class="absolute bottom-2 left-2 w-3 h-3 bg-metal-700 rounded-full border border-metal-600"></div>
+                    <div class="absolute bottom-2 right-2 w-3 h-3 bg-metal-700 rounded-full border border-metal-600"></div>
+                    
+                    <h4 class="text-2xl font-bold text-white uppercase mb-6 text-center border-b border-metal-700 pb-4">Send Us a Message</h4>
+                    <form id="contactForm" class="space-y-4">
+                        <div>
+                            <label class="block text-sm font-medium text-gray-400 mb-1">Full Name</label>
+                            <input type="text" required class="w-full bg-metal-800 border border-metal-600 text-white px-4 py-3 focus:outline-none focus:border-industrial-yellow transition-colors placeholder-metal-600" placeholder="e.g. John Doe">
+                        </div>
+                        <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                            <div>
+                                <label class="block text-sm font-medium text-gray-400 mb-1">Phone Number</label>
+                                <input type="tel" required class="w-full bg-metal-800 border border-metal-600 text-white px-4 py-3 focus:outline-none focus:border-industrial-yellow transition-colors placeholder-metal-600" placeholder="(305) 000-0000">
+                            </div>
+                            <div>
+                                <label class="block text-sm font-medium text-gray-400 mb-1">Service of Interest</label>
+                                <select class="w-full bg-metal-800 border border-metal-600 text-white px-4 py-3 focus:outline-none focus:border-industrial-yellow transition-colors appearance-none">
+                                    <option>Steel Structures</option>
+                                    <option>Impact Doors</option>
+                                    <option>Gates and Fences</option>
+                                    <option>Stairs and Balconies</option>
+                                    <option>Other</option>
+                                </select>
+                            </div>
+                        </div>
+                        <div>
+                            <label class="block text-sm font-medium text-gray-400 mb-1">Message / Project Details</label>
+                            <textarea rows="4" required class="w-full bg-metal-800 border border-metal-600 text-white px-4 py-3 focus:outline-none focus:border-industrial-yellow transition-colors placeholder-metal-600" placeholder="Describe your project..."></textarea>
+                        </div>
+                        <button type="submit" class="w-full bg-industrial-yellow text-metal-900 font-bold uppercase tracking-wider py-4 hover:bg-yellow-400 transition-colors mt-2">
+                            Submit Request
+                        </button>
+                    </form>
+                    
+                    <!-- Mensaje de éxito oculto -->
+                    <div id="successMessage" class="hidden mt-4 p-4 bg-green-900/50 border border-green-500 text-green-300 text-center rounded-sm">
+                        Thank you! Your message has been sent. We will contact you shortly.
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="bg-metal-900 border-t-4 border-industrial-yellow pt-12 pb-8">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex flex-col md:flex-row justify-between items-center mb-8 gap-6">
+                <div class="flex items-center gap-3">
+                    <svg class="h-8 w-8 text-industrial-yellow" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 21V5a2 2 0 00-2-2H7a2 2 0 00-2 2v16m14 0h2m-2 0h-5m-9 0H3m2 0h5M9 7h1m-1 4h1m4-4h1m-1 4h1m-5 10v-5a1 1 0 011-1h2a1 1 0 011 1v5m-4 0h4" />
+                    </svg>
+                    <span class="text-white text-xl font-black tracking-wider uppercase">ED <span class="text-industrial-yellow">Steel</span></span>
+                </div>
+                
+                <div class="flex gap-4">
+                    <!-- Redes sociales simuladas basadas en la info extraída -->
+                    <a href="#" class="w-10 h-10 bg-metal-800 flex items-center justify-center rounded-full text-gray-400 hover:text-industrial-yellow hover:bg-metal-700 transition-colors">
+                        <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 24 24"><path d="M24 4.557c-.883.392-1.832.656-2.828.775 1.017-.609 1.798-1.574 2.165-2.724-.951.564-2.005.974-3.127 1.195-.897-.957-2.178-1.555-3.594-1.555-3.179 0-5.515 2.966-4.797 6.045-4.091-.205-7.719-2.165-10.148-5.144-1.29 2.213-.669 5.108 1.523 6.574-.806-.026-1.566-.247-2.229-.616-.054 2.281 1.581 4.415 3.949 4.89-.693.188-1.452.232-2.224.084.626 1.956 2.444 3.379 4.6 3.419-2.07 1.623-4.678 2.348-7.29 2.04 2.179 1.397 4.768 2.212 7.548 2.212 9.142 0 14.307-7.721 13.995-14.646.962-.695 1.797-1.562 2.457-2.549z"/></svg>
+                    </a>
+                    <a href="#" class="w-10 h-10 bg-metal-800 flex items-center justify-center rounded-full text-gray-400 hover:text-industrial-yellow hover:bg-metal-700 transition-colors">
+                        <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 24 24"><path d="M9 8h-3v4h3v12h5v-12h3.642l.358-4h-4v-1.667c0-.955.192-1.333 1.115-1.333h2.885v-5h-3.808c-3.596 0-5.192 1.583-5.192 4.615v3.385z"/></svg>
+                    </a>
+                </div>
+            </div>
+            
+            <div class="border-t border-metal-800 pt-8 flex flex-col md:flex-row justify-between items-center text-sm text-gray-500 gap-4 text-center md:text-left">
+                <p>&copy; 2021 ED Steel Fabricator. All rights reserved.</p>
+                <p>Copying any image without permission will be penalized.</p>
+            </div>
+        </div>
+    </footer>
+
+    <!-- JavaScript para interactividad -->
+    <script>
+        // Lógica del Menú Móvil
+        const btn = document.getElementById('mobile-menu-btn');
+        const menu = document.getElementById('mobile-menu');
+        const menuLinks = menu.querySelectorAll('a');
+
+        btn.addEventListener('click', () => {
+            menu.classList.toggle('hidden');
+        });
+
+        // Cerrar menú al hacer clic en un enlace (móvil)
+        menuLinks.forEach(link => {
+            link.addEventListener('click', () => {
+                menu.classList.add('hidden');
+            });
+        });
+
+        // Manejo del formulario (Mock/Simulación)
+        const contactForm = document.getElementById('contactForm');
+        const successMessage = document.getElementById('successMessage');
+
+        contactForm.addEventListener('submit', (e) => {
+            e.preventDefault(); // Evita que la página se recargue
+            
+            // Simular envío
+            contactForm.reset(); // Limpiar campos
+            
+            // Mostrar mensaje de éxito
+            successMessage.classList.remove('hidden');
+            
+            // Ocultar mensaje después de 5 segundos
+            setTimeout(() => {
+                successMessage.classList.add('hidden');
+            }, 5000);
+        });
+    </script>
+</body>
+</html>
